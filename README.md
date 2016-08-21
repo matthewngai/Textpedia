@@ -8,4 +8,4 @@ Users may use this tool:
 * without smartphone
 * without data connection
 
-![Alt text](/images/translate.png?)
+<img src="/images/translate.png" width="350">
