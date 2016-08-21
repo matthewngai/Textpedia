@@ -12,16 +12,16 @@
   "license": "ISC",
   "devDependencies": {
     "body-parser": "^1.15.2",
-    "ngrok": "^2.2.2",
-    "twilio": "^2.9.2"
+    "ngrok": "^2.2.2"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "node-twilio-verify": "^1.0.0",
+    "node-twilio-verify": "^1.5.0",
     "nodemon": "^1.10.2",
     "path": "^0.12.7",
     "request": "^2.74.0",
+    "twilio": "^2.9.2",
     "xml2js": "^0.4.17",
     "yandex-translate": "^2.1.0"
   }
