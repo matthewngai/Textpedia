@@ -18,6 +18,19 @@ body{
 #process i{
 	font-size: 90px;
 }
+
+hr{
+	border-width: 3px;
+	border-color: black;
+	width: 40px;
+}
+#code{
+	margin-top: -200px;margin-bottom: 50px;
+}
+#code p{
+	font-size: 20pt;
+}
 footer{
 	margin-bottom:0;
+	background-color: #eee;
 }
