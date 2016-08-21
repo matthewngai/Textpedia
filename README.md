@@ -8,4 +8,4 @@ Users may use this tool:
 * without smartphone
 * without data connection
 
-<img src="/images/translate.png" width="350">
+<img src="/images/translate.png" width="450">
