@@ -1,9 +1,7 @@
 # Textpedia
-# TEXTPEDIA | HACK THE 6IX
-
-A text based dictionary. 
+<https://textpediaonline.herokuapp.com/>
+A text based dictionary and translator. 
 
 Users may use this tool:
 * without smartphone
 * without data connection
-
