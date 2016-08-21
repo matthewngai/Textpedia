@@ -1,5 +1,5 @@
 {
-  "name": "hackthesixapp",
+  "name": "Textpedia",
   "version": "1.0.0",
   "description": "hackathon project",
   "main": "app.js",
@@ -10,14 +10,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "body-parser": "^1.15.2",
-    "ngrok": "^2.2.2"
-  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "node-twilio-verify": "^1.5.0",
     "nodemon": "^1.10.2",
     "path": "^0.12.7",
     "request": "^2.74.0",
