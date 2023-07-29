@@ -17,12 +17,23 @@ app.get('/', function (req, res) {
 app.get('/message', function(req, res) {
     var twilio = require('twilio');
     var twiml = new twilio.TwimlResponse();
-    console.log(req.query);
-    if (req.query.Body == 'Define') {
-        twiml.message('Define word!');
-    } else {
-        twiml.message('Invalid request. Please try a different command.');
+    console.log(req.query.Body);
+    var query = [];
+    try {
+    query = req.query.Body.split(' ').toLowerCase();
+	    if (query[0] !== undefined) {
+		    if (query[0] == 'define') {
+		        twiml.message('Define word!');
+		    } else {
+		        twiml.message('Invalid request. Please try a different command.');
+		    }
+	    }
+    } catch(err) {
+    	console.log(err);
+    	twiml.message('Invalid request. Please try a different command.' + err);
     }
+
+
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
 });
