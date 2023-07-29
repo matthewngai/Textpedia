@@ -9,7 +9,6 @@ var Dictionary = require('./dictionary');
 var	request = require('request');
 var	express = require('express');
 var	bodyParser = require('body-parser');
-var TwilioAuthService = require('node-twilio-verify');
 var	dict = new Dictionary({
 		key: "54447308-e899-4235-8c60-636df931ac75"
 });
