@@ -9,6 +9,7 @@ var Dictionary = require('./dictionary');
 var	request = require('request');
 var	express = require('express');
 var	bodyParser = require('body-parser');
+var TwilioAuthService = require('node-twilio-verify');
 var	dict = new Dictionary({
 		key: "54447308-e899-4235-8c60-636df931ac75"
 });
@@ -45,7 +46,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function (req, res) {
   res.sendFile('index.html');
 });
-
 
 app.get('/message', function(req, res) {
     var twilio = require('twilio');
@@ -99,8 +99,13 @@ app.post('/message', function(req, res) {
 	            res.writeHead(200, {'Content-Type': 'text/xml'});
     			res.end(twiml.toString());
 		    }
+		    else if (query[0].toLowerCase() == 'hello') {
+	            twiml.message('Hello! This is Textpedia. Enter a word below to search for definition');
+	            res.writeHead(200, {'Content-Type': 'text/xml'});
+    			res.end(twiml.toString());
+		    }
 		    else {
-		        twiml.message('Invalid request. Please try a different command.');
+		        twiml.message('Invalid command. Please try a different command.');
 		        res.writeHead(200, {'Content-Type': 'text/xml'});
     			res.end(twiml.toString());
 		    }
