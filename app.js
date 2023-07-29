@@ -13,6 +13,7 @@ var TwilioAuthService = require('node-twilio-verify');
 var	dict = new Dictionary({
 		key: "54447308-e899-4235-8c60-636df931ac75"
 });
+var yandex = require('yandex-translate')('trnsl.1.1.20160821T044313Z.8fbdeed9f777bcbc.8bf304d8532c781d6e8f52dc8df4d3f833166087');
 var translate = function(word, callback) {
 	var definition = '';
 	dict.define(word, function(error, result){
@@ -74,9 +75,10 @@ app.post('/message', function(req, res) {
     var twilio = require('twilio');
     var twiml = new twilio.TwimlResponse();
     var query = [];
+    var fullQuery;
     try {
-    	query = req.body.Body;
-    	query = query.split(' ');
+    	fullQuery = req.body.Body;
+    	query = fullQuery.split(' ');
 	    if (query[0] !== undefined) {
 
 		    if (query[0].toLowerCase() == 'define') {
@@ -103,6 +105,18 @@ app.post('/message', function(req, res) {
 	            twiml.message('Hello! This is Textpedia. Enter a word below to search for definition');
 	            res.writeHead(200, {'Content-Type': 'text/xml'});
     			res.end(twiml.toString());
+		    }
+		    else if (query[0].toLowerCase() == 'translate') {
+		    	var result = fullQuery.split(/\s+/);
+		    	result = result.slice(2, result.length);
+		    	var sentence = result.join(" ");
+		    	yandex.translate(sentence, {to: query[1]}, function(err, resp) {
+
+		    	twiml.message(resp.text[0]);
+		        res.writeHead(200, {'Content-Type': 'text/xml'});
+	    		res.end(twiml.toString());
+		    	});
+
 		    }
 		    else {
 		        twiml.message('Invalid command. Please try a different command.');

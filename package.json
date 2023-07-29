@@ -17,6 +17,7 @@
     "nodemon": "^1.10.2",
     "path": "^0.12.7",
     "request": "^2.74.0",
-    "xml2js": "^0.4.17"
+    "xml2js": "^0.4.17",
+    "yandex-translate": "^2.1.0"
   }
 }
