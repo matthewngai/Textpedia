@@ -50,10 +50,9 @@ app.get('/', function (req, res) {
 app.get('/message', function(req, res) {
     var twilio = require('twilio');
     var twiml = new twilio.TwimlResponse();
-    console.log(req.query.Body);
     var query = [];
     try {
-    query = req.query.Body.split(' ').toLowerCase();
+    query = req.body.Body.split(' ').toLowerCase();
 	    if (query[0] !== undefined) {
 		    if (query[0] == 'define') {
 		        twiml.message('Define word!');
@@ -74,32 +73,44 @@ app.get('/message', function(req, res) {
 app.post('/message', function(req, res) {
     var twilio = require('twilio');
     var twiml = new twilio.TwimlResponse();
-    console.log(req.query.Body);
     var query = [];
     try {
-    query = req.query.Body.split(' ').toLowerCase();
+    	query = req.body.Body;
+    	query = query.split(' ');
 	    if (query[0] !== undefined) {
-		    if (query[0] == 'define') {
-          var word = query[1];
-          if (word) {
-            translate(word, function(definition) {
-            	twiml.message(definition);
-            });
-          } else {
 
-          }
-		        // twiml.message('Define word!');
-
-		    } else {
+		    if (query[0].toLowerCase() == 'define') {
+	          var word = query[1];
+	          if (word) {
+	            translate(word, function(definition) {
+	            	twiml.message(definition);
+	            	res.writeHead(200, {'Content-Type': 'text/xml'});
+    				res.end(twiml.toString());
+	            });
+	          }
+	          else {
+		        twiml.message('word is empty');
+		        res.writeHead(200, {'Content-Type': 'text/xml'});
+    			res.end(twiml.toString());
+	          }
+		    }
+		    else if (query[0].toLowerCase() == 'instruction') {
+	            twiml.message('Type define and then the word you want to search. e.g. "define happy" ');
+	            res.writeHead(200, {'Content-Type': 'text/xml'});
+    			res.end(twiml.toString());
+		    }
+		    else {
 		        twiml.message('Invalid request. Please try a different command.');
+		        res.writeHead(200, {'Content-Type': 'text/xml'});
+    			res.end(twiml.toString());
 		    }
 	    }
     } catch(err) {
     	console.log(err);
     	twiml.message('Invalid request. Please try a different command.' + err);
+    	res.writeHead(200, {'Content-Type': 'text/xml'});
+    	res.end(twiml.toString());
     }
-    res.writeHead(200, {'Content-Type': 'text/xml'});
-    res.end(twiml.toString());
 });
 
 app.listen(3000, function () {
