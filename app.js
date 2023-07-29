@@ -76,7 +76,7 @@ app.post('/message', function(req, res) {
     var twiml = new twilio.TwimlResponse();
     var query = [];
     var fullQuery;
-    try {
+     try {
     	fullQuery = req.body.Body;
     	query = fullQuery.split(' ');
 	    if (query[0] !== undefined) {
@@ -97,7 +97,11 @@ app.post('/message', function(req, res) {
 	          }
 		    }
 		    else if (query[0].toLowerCase() == 'instruction') {
-	            twiml.message('Type define and then the word you want to search. e.g. "define happy" ');
+	            twiml.message("definition: define <word>\
+translate: translate <language code> <sentence>\
+detect: detect <sentence>\
+List of language codes: languages\
+");
 	            res.writeHead(200, {'Content-Type': 'text/xml'});
     			res.end(twiml.toString());
 		    }
@@ -110,13 +114,27 @@ app.post('/message', function(req, res) {
 		    	var result = fullQuery.split(/\s+/);
 		    	result = result.slice(2, result.length);
 		    	var sentence = result.join(" ");
+
 		    	yandex.translate(sentence, {to: query[1]}, function(err, resp) {
-
-		    	twiml.message(resp.text[0]);
-		        res.writeHead(200, {'Content-Type': 'text/xml'});
-	    		res.end(twiml.toString());
+			    	twiml.message(resp.text[0]);
+			        res.writeHead(200, {'Content-Type': 'text/xml'});
+		    		res.end(twiml.toString());
 		    	});
-
+		    }
+		    else if (query[0].toLowerCase() == 'detect') {
+		    	var result = fullQuery.split(/\s+/);
+		    	result = result.slice(1, result.length);
+		    	var sentence = result.join(" ");
+				yandex.detect(sentence, function(err, resp) {
+			    	twiml.message(resp.lang);
+			        res.writeHead(200, {'Content-Type': 'text/xml'});
+		    		res.end(twiml.toString());
+				});
+		    }
+		    else if (query[0].toLowerCase() == 'languages') {
+			    twiml.message("languages");
+			    res.writeHead(200, {'Content-Type': 'text/xml'});
+		    	res.end(twiml.toString());
 		    }
 		    else {
 		        twiml.message('Invalid command. Please try a different command.');
