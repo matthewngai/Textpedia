@@ -1,3 +1,23 @@
+<<<<<<< e84a3fe48de47dc8777217357a24141e7a9a2fbd
 #blah{
 	color:red;
+=======
+
+body{
+	font-family: Museo Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
+}
+
+.intro i{
+	margin-top: 8px;
+	font-size: 30pt;
+}
+
+#about img{
+	width: 70%;
+}
+
+#about{
+	height: 402px !important;
+
+>>>>>>> site
 }
