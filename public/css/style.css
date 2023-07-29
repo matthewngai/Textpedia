@@ -8,10 +8,16 @@ body{
 }
 
 #about img{
-	width: 70%;
+	height:400px;
+	ov
 }
 
 #about{
 	height: 402px !important;
-
+}
+#process i{
+	font-size: 90px;
+}
+footer{
+	margin-bottom:0;
 }
